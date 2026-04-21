@@ -13,27 +13,46 @@ export default function RegisterPage() {
     e.preventDefault();
     setError(null);
 
-    const res = await fetch("/api/auth/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
+    try {
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
 
-    if (!res.ok) {
-      const data = await res.json().catch(() => ({}));
-      setError(data.error ?? "Registration failed");
-      return;
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        setError(data.error ?? "Registration failed");
+        return;
+      }
+
+      router.push("/login");
+    } catch {
+      setError("Network error. Please try again.");
     }
-
-    router.push("/login");
   }
 
   return (
     <main style={{ padding: 24 }}>
       <h1>Register</h1>
       <form onSubmit={onSubmit} style={{ display: "grid", gap: 12, maxWidth: 360 }}>
-        <input placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <input placeholder="password (min 6)" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <input
+          aria-label="Email"
+          placeholder="Email"
+          type="email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          aria-label="Password (minimum 6 characters)"
+          placeholder="Password (min 6)"
+          type="password"
+          minLength={6}
+          required
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
         <button type="submit">Create account</button>
         {error && <p style={{ color: "crimson" }}>{error}</p>}
       </form>
