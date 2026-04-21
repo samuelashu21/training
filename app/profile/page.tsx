@@ -24,6 +24,7 @@ export default function ProfilePage() {
 
       try {
         const res = await fetch("/api/auth/me");
+        if (!res.ok) throw new Error("Failed to fetch profile");
         const data = (await res.json()) as MeResponse;
 
         if (!cancelled) {
