@@ -1,4 +1,5 @@
 import LogoutButton from "../components/logout-button";
+import Link from "next/link";
 
 export default async function DashboardPage() {
   // This page is protected by middleware
@@ -17,6 +18,15 @@ export default async function DashboardPage() {
         <p className="text-sm text-black/70 dark:text-white/70">
           Only authenticated users can see this.
         </p>
+        <p className="mt-3 text-sm text-black/70 dark:text-white/70">
+          Beginner tip: click around, edit this file, and refresh to see how fast Next.js updates.
+        </p>
+        <Link
+          href="/profile"
+          className="mt-4 inline-block rounded-md border border-blue-600 px-3 py-2 text-sm font-medium text-blue-600 transition hover:bg-blue-50 dark:hover:bg-blue-950/40"
+        >
+          Go to profile
+        </Link>
       </section>
     </main>
   );

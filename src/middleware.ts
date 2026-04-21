@@ -6,7 +6,10 @@ export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   // Only protect these routes
-  const isProtected = pathname.startsWith("/dashboard") || pathname.startsWith("/admin");
+  const isProtected =
+    pathname.startsWith("/dashboard") ||
+    pathname.startsWith("/admin") ||
+    pathname.startsWith("/profile");
   if (!isProtected) return NextResponse.next();
 
   const token = req.cookies.get(AUTH_COOKIE)?.value;
@@ -26,5 +29,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/admin/:path*"],
-}; 
+  matcher: ["/dashboard/:path*", "/admin/:path*", "/profile/:path*"],
+};

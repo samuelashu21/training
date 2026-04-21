@@ -52,7 +52,7 @@ export default function LoginPage() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Login</button>
+        <button type="submit">Sign in</button>
         {error && <p style={{ color: "crimson" }}>{error}</p>}
       </form>
     </main>

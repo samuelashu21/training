@@ -60,7 +60,7 @@ export default function LoginPage() {
             type="submit"
             className="rounded-md bg-blue-600 px-3 py-2 font-medium text-white transition hover:bg-blue-700"
           >
-            Login
+            Sign in
           </button>
           <Link
             href="/register"
