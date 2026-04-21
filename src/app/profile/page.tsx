@@ -30,9 +30,9 @@ export default function ProfilePage() {
         if (!cancelled) {
           setUser(data.user ?? null);
         }
-      } catch {
+      } catch (error) {
         if (!cancelled) {
-          setError("Could not load profile details.");
+          setError(error instanceof Error ? error.message : "Could not load profile details.");
         }
       } finally {
         if (!cancelled) {
